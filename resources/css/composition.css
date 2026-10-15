@@ -1,0 +1,173 @@
+/*
+display: grid / flex
+gap
+globale margin-Strategien (z. B. „flow“-Klassen)
+max-width / centering
+*/
+
+
+/*      display        */
+
+.d-block{
+    display: block;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.d-inline{
+    display: inline;
+}
+
+/*      flex direction       */
+.flex-c{
+    flex-direction: column;
+}
+.flex-row{
+    flex-direction: row;
+}
+.flex-cr{
+    flex-direction: column-reverse;
+}
+
+/*          Justify         */
+.space-between{
+    justify-content: space-between;
+}
+.j-c-f-end{
+    justify-content: flex-end;
+}
+.a-i-center{
+    align-items: center;
+}
+.a-i-start{
+    align-items: flex-start;
+}
+
+/*      flex gap       */
+
+.gap-4{
+    gap: calc(var(--margin-padding-8)/2);
+}
+.gap-8{
+    gap: var(--margin-padding-8);
+}
+.gap-12{
+    gap: var(--margin-padding-12);
+}
+.gap-24{
+    gap: var(--margin-padding-24);
+}
+.gap-32{
+    gap: var(--margin-padding-32);
+}
+
+.wrap{
+    flex-wrap: wrap;
+}
+
+/*      margin      */
+
+.m-l-r-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.m-l-12{
+    margin-left: var(--margin-padding-12);
+}
+
+
+.m-b-0{
+    margin-bottom: 0;
+}
+
+.m-b-24{
+    margin-bottom: var(--margin-padding-24);
+}
+.m-b-20{
+    margin-bottom: var(--margin-padding-20);
+}
+.m-b-16{
+    margin-bottom: var(--margin-padding-16);
+}
+.m-b-8{
+    margin-bottom: var(--margin-padding-8);
+}
+.m-b-12{
+    margin-bottom: var(--margin-padding-12);
+}
+.m-b-40{
+    margin-bottom: calc(var(--margin-padding-20) *2);
+}
+
+
+@media (max-width: 1199px) {
+    .m-b-80{
+        margin-bottom: var(--margin-padding-32);
+    }
+    .m-b-32{
+        margin-bottom: var(--margin-padding-16);
+    }
+}
+@media (min-width: 1200px) {
+    .m-b-80{
+        margin-bottom: var(--margin-padding-80);
+    }
+    .m-b-32{
+        margin-bottom: var(--margin-padding-32);
+    }
+}
+
+
+
+
+
+
+/*      padding        */
+
+.p-16{
+    padding: var(--margin-padding-16);
+}
+.p-b-24{
+    padding-bottom: var(--margin-padding-24);
+}
+
+
+/*      position        */
+
+.position-relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+}
+
+
+/*      width       */
+.min-w-full{
+    min-width: 100%;
+}
+
+
+
+
+@media (max-width: 719px) {
+    .flex-1{
+        min-width: var(--w-column);
+    }
+}
+
+@media (min-width: 720px) and (max-width: 1199px) {
+    .flex-1{
+        max-width: var(--w-column);
+
+    }
+}
+
+@media (min-width: 1200px) {
+    .flex-1{
+        min-width: var(--w-column);
+    }
+}

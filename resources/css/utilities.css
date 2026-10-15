@@ -1,0 +1,77 @@
+/*
+Texteigenschaften (Fett, Ausrichtung)
+kurze Abstände
+Sichtbarkeit
+Hintergrundfarb-Hilfen
+*/
+
+
+/* Screenreader only */
+.sro {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+/*      text-transform        */
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+
+
+/*      text-color        */
+
+.text-white{
+    color: var(--white);
+}
+
+.text-black{
+    color: var(--black);
+}
+
+
+/*      font-weight        */
+
+.bold{
+    font-weight: 700;
+}
+
+.medium{
+    font-weight: 500;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.regular{
+    font-weight: 400;
+}
+
+
+/*      border-radius        */
+
+.border-radius-16{
+    border-radius: var(--border-radius);
+}
+
+
+/*      max-w        */
+
+.max-w-admin-web{
+    max-width: var(--max-w-big-desktop);
+}
+
+
+/*      border      */
+
+.border-b-black{
+    border-bottom: 1px solid var(--black);
+}
