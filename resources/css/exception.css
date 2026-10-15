@@ -1,0 +1,34 @@
+@media (max-width: 719px){
+    .table{
+        .table-row{
+            max-width: var(--w-column);
+        }
+        tbody{
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+    }
+    .project-information-list{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 720px) and (max-width: 1199px) {
+    .table{
+        .table-row{
+            max-width: var(--w-column);
+        }
+        tbody{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+
+/*@media (min-width: 1682px) {
+    .table{
+        min-width: var(--max-big-desktop);
+    }
+}*/
