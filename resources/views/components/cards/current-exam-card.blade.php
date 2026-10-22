@@ -8,7 +8,7 @@
         </div>
         <div class="d-flex flex-c gap-12">
             <p>
-                Épreuve en cours
+                {{__('pages/home.current_exam')}}
             </p>
             <p class="medium">
                 Projets web 2026-2027
@@ -18,7 +18,7 @@
 @else
     <div class="no-current-exam-card m-b-80">
         <p class="medium">
-            Aucune épreuve en cours pour le moment
+            {{__('pages/home.no_exam')}}
         </p>
     </div>
 @endif
