@@ -1,5 +1,5 @@
 <main class="main-content" id="dashboard-top">
-    <x-topbar.topbar>Evaluation de Jean Dupont</x-topbar.topbar>
+    <x-topbar.topbar>{{__('pages/evaluation.evaluation_of')}}Jean Dupont</x-topbar.topbar>
     <div class="main-container">
 
 
@@ -7,7 +7,7 @@
             <x-buttons.return-button></x-buttons.return-button>
 
             <p class="obligations medium m-b-32">
-                * Champs obligatoires
+                {{__('pages/evaluation.mandatory')}}
             </p></div>
     <form action="" class="create-form">
         @for($i=0; $i<=2; $i++)
@@ -19,7 +19,7 @@
                     <div class="flex-1">
                         <dl>
                             <x-lists.definition-term>
-                                Projet
+                                {{__('pages/evaluation.project')}}
                             </x-lists.definition-term>
                             <x-lists.definition>
                                 CV
@@ -28,10 +28,10 @@
                         <div>
                             <dl>
                                 <x-lists.definition-term>
-                                    Lien vers le projet
+                                    {{__('pages/evaluation.link_project')}}
                                 </x-lists.definition-term>
                                 <x-lists.definition>
-                                    <a href="https://hfezhhfeihfe.com" title="Aller vers la page du projet">
+                                    <a href="https://hfezhhfeihfe.com" title="{{__('pages/evaluation.go_to_project')}}">
                                         https://hfezhhfeihfe.com
                                     </a>
 
@@ -39,7 +39,7 @@
                             </dl>
                             <dl>
                                 <x-lists.definition-term>
-                                    Description du projet
+                                    {{__('pages/evaluation.description_project')}}
                                 </x-lists.definition-term>
                                 <x-lists.definition>
                                     Ici il y a une très grande description du projet que j en'ai pas encore pour le moment parce que je n'ai pas d'idées.
@@ -51,13 +51,13 @@
                         <thead>
                         <tr>
                             <th scope="col">
-                                Critères
+                                {{__('pages/evaluation.criteria')}}
                             </th>
                             <th scope="col">
-                                Fait
+                                {{__('pages/evaluation.done')}}
                             </th>
                             <th scope="col">
-                                Non-fait
+                                {{__('pages/evaluation.not_done')}}
                             </th>
                         </tr>
                         </thead>
@@ -122,13 +122,13 @@
                     <div class="flex-1">
                         <div class="comment-project">
                             <x-fields.textarea id="comment" name="comment" wire="comment" placeholder="Michel angelo a bien fait ses projets. Il a quelques difficultés avec le Design et les espaces, mais en global le projet est bien fait. Son headingsmap est correct et dans Totalvalidator il n’a pas d’erreurs. Niveau backend le projet est bien mais il manque un peu de design frontend surtout des animations">
-                                Commentaire sur le projet*
+                                {{__('pages/evaluation.comment_project')}}
                             </x-fields.textarea>
                         </div>
                         <div>
                             <div class="text-field">
                                 <label for="percent" class="">
-                                    Cote
+                                    {{__('pages/evaluation.points')}}
                                 </label>
                                 <div class="d-flex flex-row gap-8 a-i-center">
                                     <input wire:model.blur="points" type="text" name="points"
@@ -151,17 +151,17 @@
 
     <fieldset class="formfield m-b-32">
         <legend class="sro">
-            Évaluation globale
+            {{__('pages/evaluation.global_evaluation')}}
         </legend>
         <div class="two-columns global-evaluation">
             <x-fields.textarea name="global-comment" id="global-comment" wire="global-comment"
                                placeholder="Michel angelo a bien fait ses projets. Il a quelques difficultés avec le Design et les espaces, mais en global le projet est bien fait. Son headingsmap est correct et dans Totalvalidator il n’a pas d’erreurs. Niveau backend le projet est bien mais il manque un peu de design frontend surtout des animations">
-                Commentaire globale de l’évaluation
+                {{__('pages/evaluation.global_comment')}}
             </x-fields.textarea>
             <div class="global-points">
             <div class="text-field">
                 <label for="global-points" class="">
-                    Cote globale
+                    {{__('pages/evaluation.global_points')}}
                 </label>
                 <div class="d-flex flex-row gap-8 a-i-center">
                     <input wire:model.blur="global-points" type="text" name="global-points"
@@ -180,9 +180,7 @@
         </div>
     </fieldset>
 
-        <x-buttons.submit-btn class="">Enregistrer</x-buttons.submit-btn>
+        <x-buttons.submit-btn class="">{{__('pages/evaluation.save')}}</x-buttons.submit-btn>
     </form>
     </div>
 </main>
-
-
