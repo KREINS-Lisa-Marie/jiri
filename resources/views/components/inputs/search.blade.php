@@ -1,5 +1,5 @@
 <label for="search" class="sro">
-    {{--{{__('admin/contacts.search')}}--}}
-    Rechercher
+    {{__('pages/home.search')}}
+
 </label>
-<input type="text" name="search" id="search" class="search-input" {{-- value="{{/*$old || */}}"--}} placeholder="{{--{{__('admin/contacts.searching')}}--}}Rechercher" wire:model.live.debounce.300ms="search">
+<input type="text" name="search" id="search" class="search-input" {{-- value="{{/*$old || */}}"--}} placeholder="{{__('pages/home.search')}}" wire:model.live.debounce.300ms="search">

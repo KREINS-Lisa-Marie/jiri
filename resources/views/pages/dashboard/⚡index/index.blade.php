@@ -7,23 +7,23 @@
     $contacts = [];
     $weighting_options = [
                [
-                    'name' => "Pas de deuxième pondération",
+                    'name' => __('pages/dashboard.no_second_weighting'),
                     'value' => false,
                 ],
                 [
-                    'name' => "Fixer une deuxième pondération",
+                    'name' => __('pages/dashboard.fix_second_weighting'),
                     'value' => true,
                 ],
 ]
 @endphp
 <main class="main-content" id="dashboard-top">
-    <x-topbar.topbar>Dashboard Projet web 2026 - 2027</x-topbar.topbar>
+    <x-topbar.topbar>{{__('pages/dashboard.dashboard')}} Projet web 2026 - 2027</x-topbar.topbar>
     <div class="main-container">
     <x-buttons.return-button></x-buttons.return-button>
     <section class="m-b-80">
-        <x-titles.h2>Évaluations</x-titles.h2>
+        <x-titles.h2>{{__('pages/dashboard.evaluations')}}</x-titles.h2>
         <p class="m-b-32">
-            Pour visualiser les détails de chaque évaluation, clickuez sur la cellule souhaitée
+            {{__('pages/dashboard.evaluation_infos')}}
         </p>
 
         <div class="scrollable-table">
@@ -33,18 +33,18 @@
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        Contacts
+                        {{__('pages/dashboard.contacts')}}
                     </x-table.table-th>
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        Mes évaluations
+                        {{__('pages/dashboard.my_evaluations')}}
                     </x-table.table-th>
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
                             <span class="d-block">
-                                Evaluateur
+                                {{__('pages/dashboard.evaluator')}}
                             </span>
                         <span>
                                 John Doe
@@ -54,7 +54,7 @@
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
                             <span class="d-block">
-                                Evaluateur
+                                {{__('pages/dashboard.evaluator')}}
                             </span>
                         <span>
                                 John Doe
@@ -64,7 +64,7 @@
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
                             <span class="d-block">
-                                Evaluateur
+                                {{__('pages/dashboard.evaluator')}}
                             </span>
                         <span>
                                 John Doe
@@ -74,7 +74,7 @@
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
                             <span class="d-block">
-                                Evaluateur
+                                {{__('pages/dashboard.evaluator')}}
                             </span>
                         <span>
                                 John Doe
@@ -84,7 +84,7 @@
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
                             <span class="d-block">
-                                Evaluateur
+                                {{__('pages/dashboard.evaluator')}}
                             </span>
                         <span>
                                 John Doe
@@ -96,9 +96,9 @@
                 @for($i=0; $i <=4; $i++)
                     <tr class="table-row position-relative">
                         <x-table.table-th-no-sort scope="row" class="">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Contact</span>
+                            <span class="show-web">{{__('pages/dashboard.contact')}}</span>
                             <div class="td-container">
-                                <span class="">Evalué</span>
+                                <span class="">{{__('pages/dashboard.student')}}</span>
                                 <span class="">John Doe</span>
                             </div>
                         </x-table.table-th-no-sort>
@@ -115,34 +115,34 @@
                         </x-table.table-td>--}}
 
                         <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Mes évaluations</span>
+                            <span class="show-web">{{__('pages/dashboard.my_evaluations')}}</span>
                             <span>
                                 <x-buttons.not-evaluated></x-buttons.not-evaluated>
                             </span>
                         </x-table.table-td>
 
                         <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Evaluateur</span>
+                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
                             <span class="show-web">John Doe</span>
                             <x-visuals.evaluated></x-visuals.evaluated>
                         </x-table.table-td>
                         <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Evaluateur</span>
+                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
                             <span class="show-web">John Doe</span>
                             <x-visuals.not-evaluated></x-visuals.not-evaluated>
                         </x-table.table-td>
                         <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Evaluateur</span>
+                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
                             <span class="show-web">John Doe</span>
                             <x-visuals.not-evaluated></x-visuals.not-evaluated>
                         </x-table.table-td>
                         <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Evaluateur</span>
+                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
                             <span class="show-web">John Doe</span>
                             <x-visuals.not-evaluated></x-visuals.not-evaluated>
                         </x-table.table-td>
                         <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Evaluateur</span>
+                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
                             <span class="show-web">John Doe</span>
                             <x-visuals.not-evaluated></x-visuals.not-evaluated>
                         </x-table.table-td>
@@ -156,7 +156,7 @@
     </section>
 
     <section>
-        <x-titles.h2>Résultats de l’épreuve</x-titles.h2>
+        <x-titles.h2>{{__('pages/dashboard.exam_results')}}</x-titles.h2>
 
         <div class="scrollable-table">
             <table class="table big-table">
@@ -165,7 +165,7 @@
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        Contacts
+                        {{__('pages/dashboard.contacts')}}
                     </x-table.table-th>
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
@@ -180,17 +180,17 @@
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        Cote 1ère pondération
+                        {{__('pages/dashboard.first_weighting_note')}}
                     </x-table.table-th>
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        Cote 2ème pondération
+                        {{__('pages/dashboard.second_weighting')}}
                     </x-table.table-th>
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        Cote finale
+                        {{__('pages/dashboard.final_note')}}
                     </x-table.table-th>
                 </tr>
                 </thead>
@@ -200,9 +200,9 @@
                 @for($i=0; $i <=12; $i++)
                     <tr class="table-row position-relative">
                         <x-table.table-th-no-sort scope="row" class="">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Contact</span>
+                            <span class="show-web">{{__('pages/dashboard.contact')}}</span>
                             <div class="td-container">
-                                <span class="">Evalué</span>
+                                <span class="">{{__('pages/dashboard.student')}}</span>
                                 <span class="">John Doe</span>
                             </div>
                         </x-table.table-th-no-sort>
@@ -221,11 +221,11 @@
                         <x-table.table-td class="table-full_name">
 
                             <div class="td-container">
-                                <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Projet</span>
-                                <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}CV</span>
+                                <span class="show-web">{{__('pages/dashboard.project')}}</span>
+                                <span class="show-web">CV</span>
                             </div>
                             <div class="points-container">
-                                <span>Cote</span>
+                                <span>{{__('pages/dashboard.note')}}</span>
                                 <span>16/20</span>
                             </div>
                         </x-table.table-td>
@@ -233,39 +233,39 @@
                         <x-table.table-td class="table-full_name">
 
                             <div class="td-container">
-                                <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Projet</span>
-                                <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}CV</span>
+                                <span class="show-web">{{__('pages/dashboard.project')}}</span>
+                                <span class="show-web">CV</span>
                             </div>
                             <div class="points-container">
-                                <span>Cote</span>
+                                <span>{{__('pages/dashboard.note')}}</span>
                                 <span>16/20</span>
                             </div>
                         </x-table.table-td>
 
                         <x-table.table-td class="table-full_name">
                             <span
-                                class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Cote 1ere pondération</span>
+                                class="show-web">{{__('pages/dashboard.first_weighting_note')}}</span>
                             <div class="points-container">
-                                <span>Note Moyenne</span>
+                                <span>{{__('pages/dashboard.average_note')}}</span>
                                 <span>16/20</span>
                             </div>
                         </x-table.table-td>
                         <x-table.table-td class="table-full_name">
                             <span
-                                class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Cote 2ème pondération</span>
+                                class="show-web">{{__('pages/dashboard.second_weighting')}}</span>
                             <div class="points-container">
-                                <span>Note Moyenne</span>
+                                <span>{{__('pages/dashboard.average_note')}}</span>
                                 <span>16/20</span>
                             </div>
                         </x-table.table-td>
                         <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{--{{__('admin/contacts.name_title')}}--}}Note finale</span>
+                            <span class="show-web">{{__('pages/dashboard.final_note')}}</span>
                             <div class=" a-i-center">
                                 {{--     <x-fields.text id="points" name="points" placeholder="15" wire="points" value=""></x-fields.text>
                                      <span>/20</span>--}}
 
                                 <label for="percent" class="sro">
-                                    Note finale
+                                    {{__('pages/dashboard.dashboard')}}
                                 </label>
                                 <input wire:model.blur="percent" type="text" name="percent" id="percent" value=""
                                        class="field__input small-input" placeholder="16"
@@ -291,7 +291,7 @@
 
                     <td>
                             <span class="bold m-b-24 d-block">
-                                Première pondération
+                                {{__('pages/dashboard.first_weighting')}}
                             </span>
                         <div>
                             <div class="d-flex flex-c gap-32 p-b-24 m-b-16 border-b-black">
@@ -330,7 +330,7 @@
                             </div>
                             <div class="d-flex space-between flex-row">
                                     <span>
-                                        TOTAL
+                                        {{__('pages/dashboard.total')}}
                                     </span>
                                 <span>
                                         100%
@@ -353,7 +353,7 @@
                                         </span>
                                         <div class="d-flex space-between flex-row a-i-center gap-8">
                                             <label for="percent" class="sro">
-                                                Pourcentage pondération
+                                                {{__('pages/dashboard.percent_weighting')}}
                                             </label>
                                             <input wire:model.blur="percent" type="text" name="percent" id="percent"
                                                    value="" class="field__input small-input" placeholder="16"
@@ -372,7 +372,7 @@
                                         </span>
                                         <div class="d-flex space-between flex-row a-i-center gap-8">
                                             <label for="percent" class="sro">
-                                                Pourcentage pondération
+                                                {{__('pages/dashboard.percent_weighting')}}
                                             </label>
                                             <input wire:model.blur="percent" type="text" name="percent" id="percent"
                                                    value="" class="field__input small-input" placeholder="16"
@@ -391,7 +391,7 @@
                                         </span>
                                         <div class="d-flex space-between flex-row a-i-center gap-8">
                                             <label for="percent" class="sro">
-                                                Pourcentage pondération
+                                                {{__('pages/dashboard.percent_weighting')}}
                                             </label>
                                             <input wire:model.blur="percent" type="text" name="percent" id="percent"
                                                    value="" class="field__input small-input" placeholder="16"
@@ -410,7 +410,7 @@
                                         </span>
                                         <div class="d-flex space-between flex-row a-i-center gap-8">
                                             <label for="percent" class="sro">
-                                                Pourcentage pondération
+                                                {{__('pages/dashboard.percent_weighting')}}
                                             </label>
                                             <input wire:model.blur="percent" type="text" name="percent" id="percent"
                                                    value="" class="field__input small-input" placeholder="16"
@@ -426,7 +426,7 @@
                                 </div>
                                 <div class="d-flex space-between flex-row a-i-center">
                                     <span>
-                                        TOTAL
+                                        {{__('pages/dashboard.total')}}
                                     </span>
                                     <span>
                                         100%
@@ -434,7 +434,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="primary-btn">
-                                Enregistrer
+                                {{__('pages/dashboard.save')}}
                             </button>
                         </form>
                     </td>
