@@ -3,11 +3,11 @@
 ])
 <div class="primary-btn">
     <a href="{{ url()->previous()}}" class="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
-            <path
-                d="M21.6445 8.58464L0.999944 8.58463M0.999944 8.58463L11.3222 16.168M0.999944 8.58463L11.3222 1.0013"
-                stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <span>
+        <svg class="return-arrow-icon" width="23" height="18">
+        <use href="#return-arrow-icon"></use>
         </svg>
-        Retour
+        </span>
+        {{__('pages/evaluation.return')}}
     </a>
 </div>
