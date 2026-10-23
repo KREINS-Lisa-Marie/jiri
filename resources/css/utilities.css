@@ -24,6 +24,11 @@ Hintergrundfarb-Hilfen
     text-transform: uppercase;
 }
 
+/*      text-decoration        */
+
+.underline{
+    text-decoration: underline;
+}
 
 
 /*      text-color        */
