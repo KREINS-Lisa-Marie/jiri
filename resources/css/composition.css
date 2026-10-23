@@ -56,6 +56,9 @@ max-width / centering
 .gap-12{
     gap: var(--margin-padding-12);
 }
+.gap-20{
+    gap: var(--margin-padding-20);
+}
 .gap-24{
     gap: var(--margin-padding-24);
 }
@@ -100,6 +103,9 @@ max-width / centering
 }
 .m-b-40{
     margin-bottom: calc(var(--margin-padding-20) *2);
+}
+.m-t-20{
+    margin-top: var(--margin-padding-20);
 }
 
 

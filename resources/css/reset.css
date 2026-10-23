@@ -47,6 +47,14 @@ table {
     border-spacing: 0;
 }
 
-body{
-    font-size: var(--p-h6);
+@media (max-width: 719px) {
+    body{
+        font-size: var(--p-h6-phone);
+    }
 }
+@media (min-width: 720px) {
+    body{
+        font-size: var(--p-h6);
+    }
+}
+
