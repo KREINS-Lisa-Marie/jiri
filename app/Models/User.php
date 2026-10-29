@@ -6,16 +6,18 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['first_name', 'last_name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasUuids;
 
     /**
      * Get the attributes that should be cast.
@@ -29,4 +31,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function contacts():HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
+    public function jiris():HasMany
+    {
+        return $this->hasMany(Jiri::class);
+    }
+
+
 }
