@@ -19,7 +19,7 @@ class Contact extends Model
         'profile_img',
         'email',
         'user_id',
-        'archived_at',
+        'archived',
     ];
 
 

@@ -24,7 +24,7 @@ class ContactFactory extends Factory
             'last_name' => fake()->lastName,
             'email' => fake()->unique()->safeEmail(),
             'user_id' => $random_user,
-            'archived_at' => $random_archived,
+            'archived' => $random_archived,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

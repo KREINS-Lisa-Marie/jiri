@@ -12,9 +12,11 @@ class JiriFactory extends Factory
 
     public function definition(): array
     {
+        $random_time = ['8-12h & 17-20h', '9-12h & 13-16h', '8-12h'];
+
         return [
             'name'=>fake()->word(),
-            'time'=>fake()->time(),
+            'time'=>fake()->randomElement($random_time),
             'date'=> fake()->date(),
             'state'=>fake()->boolean([50]),
             'created_at' => Carbon::now(),

@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('profile_img')->nullable();
             $table->string('email')->unique();
             $table->foreignUuid('user_id');
-            $table->boolean('archived_at');
+            $table->boolean('archived');
             $table->timestamps();
         });
     }
