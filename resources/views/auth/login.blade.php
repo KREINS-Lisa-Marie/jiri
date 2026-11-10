@@ -6,7 +6,7 @@
                 <x-titles.h2>
                     {{__('auth/login.connect')}}
                 </x-titles.h2>
-                <a href="{{ route('pages::dashboard.index', ['locale' => __('general.currentLocale')]) }}"
+                <a href="{{ route('login', ['locale' => __('general.currentLocale')]) }}"
                    lang="{{app()->getLocale()}}"
                    hreflang="{{app()->getLocale()}}"
                    class="logo-link d-flex flex-a-i-center auth-logo"
@@ -33,18 +33,17 @@
             <form action="{{ route('login.store'/*, ['locale' => __('general.currentLocale')]*/) }}" method="post"
                   class="login-form">
                 @csrf
-
                 <div class="flex-c d-flex gap-24 m-b-24">
                     <x-auth.form.email-input></x-auth.form.email-input>
                     <x-auth.form.password wire="password" class="" ></x-auth.form.password>
                 </div>
 
                 <div class="add-info m-b-32">
-                    <a href="{{route('password.request')}}"
+                    <a href="{{route('auth.forgot-password', ['locale' => app()->getLocale()])}}"
                        class="d-block medium m-b-24 underline">
                         {{__('auth/login.password_forgotten')}}
                     </a>
-                    <a href="{{route('register')}}"
+                    <a href="{{route('auth.register', ['locale' => app()->getLocale()])}}"
                        class="d-block medium m-b-24 underline">
                         {{__('auth/login.no_account')}}
                     </a>
