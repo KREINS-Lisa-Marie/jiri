@@ -26,21 +26,36 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'first_name' => 'Test',
             'last_name' => 'User',
             'email' => 'test@example.com',
         ]);
 
-        Project::factory(5)->create();
+        Project::factory(5)->create(['user_id'=>$user->id]);
         Criteria::factory(5)->create();
-        Contact::factory(5)->create();
-        Jiri::factory(5)->create();
+        Contact::factory(5)->create(['archived' => false]);
+        Contact::factory(5)->create(['archived' => true]);
+        Jiri::factory(5)->create([
+            'user_id'=>$user->id,
+        ]);
 
         Homework::factory(5)->create();
         Attendance::factory(5)->create();
         Implementation::factory(5)->create();
-        Score::factory(5)->create();
+
+        $evaluators = Contact::take(5)->get();
+        $implementations = Implementation::all();
+
+        foreach($implementations as $implementation){
+            foreach($evaluators as $evaluator) {
+                Score::factory([
+                    'implementation_id' => $implementation->id,
+                    'contact_id' => $evaluator->id,
+                ])->create();
+            }
+        }
+
         Performance::factory(5)->create();
 
     }
