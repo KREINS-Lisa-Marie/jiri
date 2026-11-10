@@ -15,7 +15,7 @@
                         {{__('auth/register.register')}}
                     </x-titles.h2>
 
-                    <a href="{{ route('pages::dashboard.index', ['locale' => __('general.currentLocale')]) }}"
+                    <a href="{{ route('login', ['locale' => __('general.currentLocale')]) }}"
                        lang="{{app()->getLocale()}}"
                        hreflang="{{app()->getLocale()}}"
                        class="logo-link d-flex flex-a-i-center auth-logo"
