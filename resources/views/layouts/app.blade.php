@@ -9,11 +9,13 @@
           content="Jiri, Evaluateur, Evalué, Evaluation, Projets">
     <meta name="author" content="Lisa-Marie Kreins">
     <meta name="description" content="La page de Jiri">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
     <title>{{ $title ?? 'Jiri' }}</title>
     @vite(['resources/css/app.css'])
 </head>
 <body class="#dashboard-top">
-@if( !in_array($currentRoute, ['login', 'register', 'password.request', 'password.reset']))
+@if( !in_array($currentRoute, ['login', 'auth.login', 'register', 'auth.register', 'password.request', 'auth.forgot-password','auth.reset-password', 'password.reset']))
     <x-sidebar></x-sidebar>
 @else
     <x-navigation></x-navigation>
@@ -29,7 +31,11 @@
 
 
 
-
+{{--
+https://laravel-livewire.com/screencasts/s4-rich-text
+https://github.com/basecamp/trix
+https://trix-editor.org/
+--}}
 
 
 {{--        svg's disponibles dans le projet        --}}
@@ -45,8 +51,6 @@
 </svg>
 
 
-
-
 {{--        Arrow left      --}}
 
 <svg style="display:none;" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,8 +58,6 @@
         <path d="M16.5 7.5H0.5M7.5 14.5L0.5 7.5L7.5 0.5" stroke-linecap="round" stroke-linejoin="round" stroke="black" fill="none" />
     </symbol>
 </svg>
-
-
 
 
 {{--        arrow left return      --}}
@@ -68,19 +70,12 @@
 </svg>
 
 
-
-
-
 {{--        Arrow right      --}}
 <svg style="display:none;" fill="none" xmlns="http://www.w3.org/2000/svg">
     <symbol preserveAspectRatio="none" id="right-arrow-icon" viewBox="0 0 17 15">
         <path d="M0.5 7.5H16.5M9.5 14.5L16.5 7.5L9.5 0.5" stroke-linecap="round" stroke-linejoin="round" stroke="black" fill="none"/>
     </symbol>
 </svg>
-
-
-
-
 
 
 {{--        trash      --}}
@@ -115,6 +110,42 @@
     <symbol preserveAspectRatio="none" id="plus-icon" viewBox="0 0 14 14">
         <path d="M7 13V7M7 7V1M7 7H13M7 7H1" stroke="black" stroke-width="2"
               stroke-linecap="round"/>
+    </symbol>
+</svg>
+
+
+{{--        archive      --}}
+
+<svg style="display:none;" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <symbol preserveAspectRatio="none" id="archive-icon" viewBox="0 0 17 18">
+        <path d="M0.5 8C0.5 8.82844 0.5 9.24267 0.635111 9.56889C0.724456 9.78473 0.855463 9.98084 1.02064 10.146C1.18582 10.3112 1.38194 10.4422 1.59778 10.5316C1.924 10.6667 2.33822 10.6667 3.16667 10.6667H3.76667C4.28311 10.6667 4.54178 10.6667 4.748 10.7858C4.80001 10.8157 4.84885 10.8509 4.89378 10.8907C5.07156 11.0489 5.15333 11.2933 5.31689 11.784L5.428 12.1182C5.62356 12.7049 5.72133 12.9982 5.95422 13.1653C6.18711 13.3333 6.49644 13.3333 7.1151 13.3333H7.11511H9.88578H9.88579C10.5036 13.3333 10.8129 13.3333 11.0458 13.1653C11.2787 12.9973 11.3764 12.7049 11.572 12.1182L11.6831 11.784C11.8467 11.2933 11.9284 11.0489 12.1062 10.8907C12.1511 10.8509 12.2 10.8157 12.252 10.7858C12.4582 10.6667 12.7169 10.6667 13.2333 10.6667H13.8333C14.6618 10.6667 15.076 10.6667 15.4022 10.5316C15.6181 10.4422 15.8142 10.3112 15.9794 10.146C16.1445 9.98084 16.2755 9.78473 16.3649 9.56889C16.5 9.24267 16.5 8.82844 16.5 8M12.0556 6.22222L8.5 8.88889L4.94444 6.22222M8.5 8.88889V0" stroke="black" fill="none"/>
+        <path d="M12.0556 2.66699H12.9444C14.6209 2.66699 15.4582 2.66699 15.9791 3.18788C16.5 3.70877 16.5 4.5461 16.5 6.22255V13.3337C16.5 15.0101 16.5 15.8474 15.9791 16.3683C15.4582 16.8892 14.6209 16.8892 12.9444 16.8892H4.05556C2.37911 16.8892 1.54178 16.8892 1.02089 16.3683C0.5 15.8474 0.5 15.0101 0.5 13.3337V6.22255C0.5 4.5461 0.5 3.70877 1.02089 3.18788C1.54178 2.66699 2.37911 2.66699 4.05556 2.66699H4.94444" stroke="black" fill="none"/>
+    </symbol>
+</svg>
+
+
+{{--        disarchive      --}}
+
+<svg style="display:none;" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <symbol preserveAspectRatio="none" id="disarchive-icon" viewBox="0 0 17 17">
+        <path d="M0.5 4.05556C0.5 2.37911 0.5 1.54178 1.02089 1.02089C1.54178 0.5 2.37911 0.5 4.05556 0.5H12.9444C14.6209 0.5 15.4582 0.5 15.9791 1.02089C16.5 1.54178 16.5 2.37911 16.5 4.05556V12.9444C16.5 14.6209 16.5 15.4582 15.9791 15.9791C15.4582 16.5 14.6209 16.5 12.9444 16.5H4.05556C2.37911 16.5 1.54178 16.5 1.02089 15.9791C0.5 15.4582 0.5 14.6209 0.5 12.9444V4.05556Z" stroke="black" fill="none"/>
+        <path d="M0.5 8.49913C0.5 9.32758 0.5 9.7418 0.635111 10.068C0.724456 10.2839 0.855463 10.48 1.02064 10.6452C1.18582 10.8103 1.38194 10.9413 1.59778 11.0307C1.924 11.1658 2.33822 11.1658 3.16667 11.1658H3.76667C4.28311 11.1658 4.54178 11.1658 4.748 11.2849C4.80001 11.3149 4.84885 11.35 4.89378 11.3898C5.07156 11.548 5.15333 11.7925 5.31689 12.2831L5.428 12.6165C5.62356 13.2031 5.72133 13.4965 5.95422 13.6654C6.18711 13.8325 6.49644 13.8325 7.11511 13.8325H9.88578H9.88579C10.5036 13.8325 10.8129 13.8325 11.0458 13.6645C11.2787 13.4965 11.3764 13.204 11.572 12.6174L11.6831 12.2831C11.8467 11.7925 11.9284 11.548 12.1062 11.3898C12.1511 11.35 12.2 11.3149 12.252 11.2849C12.4582 11.1658 12.7169 11.1658 13.2333 11.1658H13.8333C14.6618 11.1658 15.076 11.1658 15.4022 11.0307C15.6181 10.9413 15.8142 10.8103 15.9794 10.6452C16.1445 10.48 16.2755 10.2839 16.3649 10.068C16.5 9.7418 16.5 9.32758 16.5 8.49913M10.7222 6.27691L8.5 4.05469L6.27778 6.27691M8.5 4.05469V10.2769" stroke="black" fill="none"/>
+    </symbol>
+</svg>
+
+
+{{--        edit      --}}
+
+<svg style="display:none;"  xmlns="http://www.w3.org/2000/svg">
+    <symbol preserveAspectRatio="none" id="edit-icon" viewBox="0 0 15 15" >
+        <path d="M4 13L0.5 14L1.5 10.5L11.5 0.5L14 3L4 13ZM1.5 10.5L4 13M9.5 2.5L12 5" stroke-linecap="round" stroke-linejoin="round" stroke="black" fill="none" />
+    </symbol>
+</svg>
+
+{{--        eye      --}}
+<svg style="display:none;" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <symbol preserveAspectRatio="none" id="eye-icon" viewBox="0 0 16 16" >
+        <path d="M14.7215 7.59688C13.2402 4.47656 11.0012 2.90625 7.9996 2.90625C4.99648 2.90625 2.75898 4.47656 1.27773 7.59844C1.21831 7.72425 1.1875 7.86165 1.1875 8.00078C1.1875 8.13991 1.21831 8.27732 1.27773 8.40312C2.75898 11.5234 4.99804 13.0938 7.9996 13.0938C11.0027 13.0938 13.2402 11.5234 14.7215 8.40156C14.8418 8.14844 14.8418 7.85469 14.7215 7.59688ZM7.9996 11.9688C5.47929 11.9688 3.63398 10.6906 2.33241 8C3.63398 5.30938 5.47929 4.03125 7.9996 4.03125C10.5199 4.03125 12.3652 5.30938 13.6668 8C12.3668 10.6906 10.5215 11.9688 7.9996 11.9688ZM7.9371 5.25C6.41835 5.25 5.1871 6.48125 5.1871 8C5.1871 9.51875 6.41835 10.75 7.9371 10.75C9.45585 10.75 10.6871 9.51875 10.6871 8C10.6871 6.48125 9.45585 5.25 7.9371 5.25ZM7.9371 9.75C6.96991 9.75 6.1871 8.96719 6.1871 8C6.1871 7.03281 6.96991 6.25 7.9371 6.25C8.90429 6.25 9.6871 7.03281 9.6871 8C9.6871 8.96719 8.90429 9.75 7.9371 9.75Z" fill="black"/>
     </symbol>
 </svg>
 
@@ -248,6 +279,30 @@
 {{--<span>
     <svg class="plus-icon" width="14" height="14">
         <use href="#plus-icon"></use>
+    </svg>
+</span>--}}
+
+
+{{--    archive    --}}
+{{--<span>
+    <svg class="archive-icon" width="17" height="18">
+        <use href="#archive-icon"></use>
+    </svg>
+</span>--}}
+
+
+{{--    disarchive    --}}
+{{--<span>
+    <svg class="disarchive-icon" width="17" height="17">
+        <use href="#disarchive-icon"></use>
+    </svg>
+</span>--}}
+
+
+{{--        Edit        --}}
+{{--<span>
+    <svg class="edit-icon" width="15" height="15">
+        <use href="#edit-icon"></use>
     </svg>
 </span>--}}
 
