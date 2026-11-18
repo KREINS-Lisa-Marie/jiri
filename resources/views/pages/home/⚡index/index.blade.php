@@ -213,54 +213,54 @@
                 {{__('pages/home.projects')}}
             </x-titles.h2>
             <div class="d-flex flex-row space-between dashboard-actions-container">
-                <x-buttons.add-btn>
+                <x-buttons.add-btn wire:click="openProjectCreateModal" title="{{__('pages/home.add_project')}}" icon="add">
                     {{__('pages/home.add_project')}}
                 </x-buttons.add-btn>
 
-                <x-inputs.search></x-inputs.search>
+                <x-inputs.search model="project_search"></x-inputs.search>
             </div>
 
             <table class="table max-w-admin-web">
                 <thead>
                 <tr>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')" :direction="$sortField === 'jiri'? $sortDirection : null" class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        {{__('pages/home.exam')}}
-                    </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('date')"  :direction="$sortField === 'date'? $sortDirection : null" class="{{$sortField === 'date'? 'active-sort': ''}}">
-                        {{__('pages/home.date')}}
-                    </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('duration')"  :direction="$sortField === 'duration'? $sortDirection : null" class="{{$sortField === 'duration'? 'active-sort': ''}}">
-                        {{__('pages/home.duration')}}
+                    <x-table.table-th scope="col" sortable wire:click="sortBy('name')" :direction="$sortField === 'name'? $sortDirection : null" class="{{$sortField === 'name'? 'active-sort': ''}}">
+                        {{__('pages/home.project_name')}}
                     </x-table.table-th>
                     <x-table.table-th scope="col" sortable wire:click="sortBy('state')"  :direction="$sortField === 'state'? $sortDirection : null" class="{{$sortField === 'state'? 'active-sort': ''}}">
-                        {{__('pages/home.state')}}
+                        {{__('pages/home.project_state')}}
+                    </x-table.table-th>
+                    <x-table.table-th scope="col"  direction="" sortable="" class="">
+                        {{__('pages/home.project_specifications')}}
+                    </x-table.table-th>
+                    <x-table.table-th scope="col" class="" direction="" sortable="">
+                            {{__('pages/home.action')}}
                     </x-table.table-th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($contacts as $contact)
+                @forelse($projects as $project)
                     <tr class="table-row position-relative">
                         <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{__('pages/home.exam')}}</span>
-                            Projets web 2026
+                            <span class="show-web">{{__('pages/home.project_name')}}</span>
+                            {{$project->name}}
                         </x-table.table-td>
                         <x-table.table-td class="table-name fw-medium">
                             <span
-                                class="show-web">{{__('pages/home.date')}}</span>
-                            24.05.26
+                                class="show-web">{{__('pages/home.project_state')}}</span>
+                            {{$project->state}}
                         </x-table.table-td>
                         <x-table.table-td class="table-state">
                             <span
-                                class="show-web">{{__('pages/home.duration')}}</span>
-                            10-12 et 13-17h
+                                class="show-web">{{__('pages/home.project_specifications')}}</span>
+
+                            <x-buttons.icon-btn class="eye-btn" href="{{$project->specifications}}" icon="eye">Voir</x-buttons.icon-btn>
                         </x-table.table-td>
                         <x-table.table-td class="table-species">
                             <span
-                                class="show-web">{{__('pages/home.state')}}</span>
-                            {{--  <a href="{{route('pages::contacts.show',  ['locale' => __('general.currentLocale'),  'contact' => $contact->id])}}"
-                                 title="{{__('admin/contacts.go_to_contact')}}" class="card-link">
-                              </a>--}}
-                            Terminé
+                                class="show-web">{{__('pages/home.action')}}</span>
+                            <x-buttons.icon-btn icon="edit" class="primary-btn" wire:click="openProjectUpdateModal('{{ $project->id }}')" title="{{__('pages/home.edit_project')}}" >
+                                {{__('pages/home.edit')}}
+                            </x-buttons.icon-btn>
                         </x-table.table-td>
                     </tr>
                 @empty
@@ -273,8 +273,17 @@
                 </tbody>
             </table>
             <div class="pagination max-w-admin-web">
-                {{--{{ $contacts->links() }}--}}
+                {{ $projects->links() }}
             </div>
         </section>
+
+         {{--        Project     --}}
+        @if($isopenProjectUpdateModal)
+                <x-modals.project-update-modal :project-information="$project_information"/>
+        @endif
+        @if($isopenProjectCreateModal)
+                <x-modals.project-create-modal/>
+        @endif
     </div>
 </main>
+
