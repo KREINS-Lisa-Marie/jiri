@@ -9,7 +9,7 @@
             <p class="obligations medium m-b-32">
                 {{__('pages/evaluation.mandatory')}}
             </p></div>
-    <form action="" class="create-form">
+    <form wire:submit.prevent="store" action="" class="create-form">
         @for($i=0; $i<=2; $i++)
             <fieldset class="formfield m-b-32">
                 <legend class="sro">
