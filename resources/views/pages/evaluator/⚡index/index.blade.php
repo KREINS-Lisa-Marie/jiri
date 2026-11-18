@@ -50,8 +50,7 @@
                             John Doe
                         </x-table.table-td>
                         <x-table.table-td class="table-name fw-medium">
-                            <span
-                                class="show-web">{{__('pages/evaluator.evaluations')}}</span>
+                            <span class="show-web">{{__('pages/evaluator.evaluations')}}</span>
 
                             <x-fields.select select_name="evaluated"
                                                               label="{{--{{__('admin/orders.for_who')}}<!--Évaluations-->--}}"
