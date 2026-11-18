@@ -1,16 +1,7 @@
-@php
-    $currentexam = null;
-    $direction = '';
-    $sortable = '';
-    $exams = [];
-    $sortField = 'name';
-    $contacts = [];
-@endphp
-
 <main class="" id="dashboard-top">
 <x-topbar.topbar>{{__('pages/home.dashboard')}}</x-topbar.topbar>
     <div class="main-container">
-        <x-cards.current-exam-card :currentexam="$currentexam">
+        <x-cards.current-exam-card :currentexams="$currentexams">
         </x-cards.current-exam-card>
 
         <section id="exams" class="m-b-80">
@@ -19,53 +10,52 @@
              {{__('pages/home.exams')}}
          </x-titles.h2>
             <div class="dashboard-actions-container d-flex flex-row space-between">
-                <x-buttons.add-btn>
+                <x-buttons.add-btn icon="add" href="{{route('pages::exams.create',  ['locale' => app()->getLocale()])}}">
                     {{__('pages/home.add_exam')}}
                 </x-buttons.add-btn>
-                <x-inputs.search></x-inputs.search>
+                <x-inputs.search model="jiri_search"></x-inputs.search>
             </div>
 
             <table class="table max-w-admin-web">
                 <thead>
                 <tr>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')" :direction="$sortField === 'jiri'? $sortDirection : null" class="{{$sortField === 'jiri'? 'active-sort': ''}}">
+                    <x-table.table-th scope="col" sortable wire:click="sortJirisBy('name')" :direction="$sortJiriField === 'name'? $sortJiriDirection : null" class="{{$sortJiriField === 'name'? 'active-sort': ''}}">
                         {{__('pages/home.exam')}}
                     </x-table.table-th>
-                        <x-table.table-th scope="col" sortable wire:click="sortBy('date')"  :direction="$sortField === 'date'? $sortDirection : null" class="{{$sortField === 'date'? 'active-sort': ''}}">
+                        <x-table.table-th scope="col" sortable wire:click="sortJirisBy('date')"  :direction="$sortJiriField === 'date'? $sortJiriDirection : null" class="{{$sortJiriField === 'date'? 'active-sort': ''}}">
                             {{__('pages/home.date')}}
                     </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('duration')"  :direction="$sortField === 'duration'? $sortDirection : null" class="{{$sortField === 'duration'? 'active-sort': ''}}">
+                    <x-table.table-th scope="col" sortable="" direction="" class="">
                         {{__('pages/home.duration')}}
                     </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('state')"  :direction="$sortField === 'state'? $sortDirection : null" class="{{$sortField === 'state'? 'active-sort': ''}}">
+                    <x-table.table-th scope="col" sortable wire:click="sortJirisBy('state')"  :direction="$sortJiriField === 'state'? $sortJiriDirection : null" class="{{$sortJiriField === 'state'? 'active-sort': ''}}">
                         {{__('pages/home.state')}}
                     </x-table.table-th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($contacts as $contact)
+                @forelse($jiris as $jiri)
                     <tr class="table-row position-relative">
                         <x-table.table-td class="table-full_name">
                             <span class="show-web">{{__('pages/home.exam')}}</span>
-                            Projets web 2026
+                            {{$jiri->name}}
                         </x-table.table-td>
                         <x-table.table-td class="table-name fw-medium">
                             <span
                                 class="show-web">{{__('pages/home.date')}}</span>
-                            24.05.26
+                            {{\Carbon\Carbon::parse($jiri->date)->format('d.m.Y')}}
                         </x-table.table-td>
                         <x-table.table-td class="table-state">
                             <span
                                 class="show-web">{{__('pages/home.duration')}}</span>
-                            10-12 et 13-17h
+                            {{$jiri->time}}
                         </x-table.table-td>
                         <x-table.table-td class="table-species">
                             <span
                                 class="show-web">{{__('pages/home.state')}}</span>
-                          {{--  <a href="{{route('pages::contacts.show',  ['locale' => __('general.currentLocale'),  'contact' => $contact->id])}}"
-                               title="{{__('admin/contacts.go_to_contact')}}" class="card-link">
-                            </a>--}}
-                            Terminé
+                            {{$jiri->state ? __('pages/home.jiri_state_activ') : __('pages/home.jiri_state_not_activ')}}
+                            <a href="{{route('pages::exams.show',  ['locale' => app()->getLocale(),  'jiri' => $jiri->id])}}" title="{{__('pages/home.go_to_current_exam')}}" class="card-link">
+                            </a>
                         </x-table.table-td>
                     </tr>
                 @empty
@@ -78,7 +68,7 @@
                 </tbody>
             </table>
             <div class="pagination max-w-admin-web">
-                {{--{{ $contacts->links() }}--}}
+                {{ $jiris->links() }}
             </div>
         </section>
         <section id="contacts" class="m-b-80">
@@ -288,4 +278,3 @@
         </section>
     </div>
 </main>
-
