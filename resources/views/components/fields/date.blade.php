@@ -2,7 +2,7 @@
     <label for="date" class="field__label">
         {!! $slot !!}
     </label>
-    <input type="date" name="date" id="date" {{--value="{!! $old_date !!}"--}} class="field__input">
+    <input type="date" name="date" id="date" {{--value="{!! $old_date !!}"--}} class="field__input" wire:model="date" >
     @error('date')
     {{$message}}
     @enderror
