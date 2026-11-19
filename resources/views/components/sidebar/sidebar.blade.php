@@ -9,7 +9,7 @@
                 {{__('navigation.main_navigation')}}
             </h2>
 
-            <a href="{{ route('pages::home.index') }}"
+            <a href="{{ route('pages::home.index', ['locale' => app()->getLocale()]) }}"
                lang="{{app()->getLocale()}}"
                hreflang="{{app()->getLocale()}}"
                class="logo-link"
@@ -40,7 +40,7 @@
 
         <ul class="flex flex-col sidebar-nav-links nav__container__header l-height-32 medium">
             <li class="nav__item__header">
-                <a href="{{route('pages::home.index')}}" class="nav__link__header {{ request()->routeIs('pages::home.index') ? 'active' : '' }}" aria-label="{{__('navigation.go_home')}}" title="{{__('navigation.go_home')}}">
+                <a href="{{route('pages::home.index', ['locale' => app()->getLocale()])}}" class="nav__link__header {{ request()->routeIs('pages::home.index') ? 'active' : '' }}" aria-label="{{__('navigation.go_home')}}" title="{{__('navigation.go_home')}}">
                     <span>
                     <svg class="home-icon"  width="15" height="14">
                     <use href="#home-icon"></use>
@@ -82,7 +82,7 @@
         </ul>
 
         <div class="nav__container__header profile-disconnect-link medium">
-            <a href="{{route('pages::home.index', ['locale' => __('general.currentLocale')])}}" class="nav__link__header {{ request()->routeIs('pages::products.index') ? 'active' : '' }}" title="{{__('navigation.go_profile')}}" aria-label="{{__('navigation.go_profile')}}">
+            <a href="{{route('pages::profil.index', ['locale' => app()->getLocale()])}}" class="nav__link__header {{ request()->routeIs('pages::products.index') ? 'active' : '' }}" title="{{__('navigation.go_profile')}}" aria-label="{{__('navigation.go_profile')}}">
                 <span>
                     <svg class="profile-icon"  width="11" height="12">
                     <use href="#profile-icon"></use>
