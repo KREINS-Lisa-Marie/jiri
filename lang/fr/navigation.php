@@ -27,4 +27,5 @@ return [
 
     'logo' => 'Logo des Jiri — Aller vers le Dashboard',
     'go_to_homepage' => 'Aller vers la page Dashboard',
+    'logo_go_login' => 'Aller vers la page de connexion',
 ];

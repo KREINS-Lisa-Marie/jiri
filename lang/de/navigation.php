@@ -27,6 +27,7 @@ return [
 
     'logo' => 'Jiri-Logo — Zum Dashboard gehen',
     'go_to_homepage' => 'Zur Dashboard-Seite gehen',
+    'logo_go_login' => 'Zur Anmeldeseite gehen',
 
 
 
