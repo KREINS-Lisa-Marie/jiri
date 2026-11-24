@@ -1,10 +1,4 @@
 @php
-    $currentexam = null;
-    $direction = '';
-    $sortable = '';
-    $exams = [];
-    $sortField = 'name';
-    $contacts = [];
     $weighting_options = [
                [
                     'name' => __('pages/dashboard.no_second_weighting'),
@@ -17,7 +11,7 @@
 ]
 @endphp
 <main class="main-content" id="dashboard-top">
-    <x-topbar.topbar>{{__('pages/dashboard.dashboard')}} Projet web 2026 - 2027</x-topbar.topbar>
+    <x-topbar.topbar>{{__('pages/dashboard.dashboard')}} {{$jiri->name}}</x-topbar.topbar>
     <div class="main-container">
     <x-buttons.return-button></x-buttons.return-button>
     <section class="m-b-80">
@@ -30,125 +24,62 @@
             <table class="table max-w-admin-web big-table">
                 <thead>
                 <tr>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
+                    <x-table.table-th scope="col" sortable wire:click="sortBy('first_name')"
+                                      :direction="$sortField === 'first_name'? $sortDirection : null"
+                                      class="{{$sortField === 'first_name'? 'active-sort': ''}}">
                         {{__('pages/dashboard.contacts')}}
                     </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
+                    <x-table.table-th-no-sort scope="col" class="medium">
                         {{__('pages/dashboard.my_evaluations')}}
-                    </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
+                    </x-table.table-th-no-sort>
+                        @foreach($evaluators as $evaluator)
+                    <x-table.table-th-no-sort scope="col" class="medium">
                             <span class="d-block">
                                 {{__('pages/dashboard.evaluator')}}
                             </span>
                         <span>
-                                John Doe
+                            {{$evaluator->contact->first_name}}
+                            {{$evaluator->contact->last_name}}
                             </span>
-                    </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                            <span class="d-block">
-                                {{__('pages/dashboard.evaluator')}}
-                            </span>
-                        <span>
-                                John Doe
-                            </span>
-                    </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                            <span class="d-block">
-                                {{__('pages/dashboard.evaluator')}}
-                            </span>
-                        <span>
-                                John Doe
-                            </span>
-                    </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                            <span class="d-block">
-                                {{__('pages/dashboard.evaluator')}}
-                            </span>
-                        <span>
-                                John Doe
-                            </span>
-                    </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                            <span class="d-block">
-                                {{__('pages/dashboard.evaluator')}}
-                            </span>
-                        <span>
-                                John Doe
-                            </span>
-                    </x-table.table-th>
+                    </x-table.table-th-no-sort>
+                    @endforeach
                 </tr>
                 </thead>
                 <tbody>
-                @for($i=0; $i <=4; $i++)
+
+                    @foreach($evaluated as $evaluatedPerson)
                     <tr class="table-row position-relative">
                         <x-table.table-th-no-sort scope="row" class="">
                             <span class="show-web">{{__('pages/dashboard.contact')}}</span>
                             <div class="td-container">
                                 <span class="">{{__('pages/dashboard.student')}}</span>
-                                <span class="">John Doe</span>
+                                <span class="">
+                                {{$evaluatedPerson->contact->last_name}}
+                                {{$evaluatedPerson->contact->first_name}}</span>
                             </div>
                         </x-table.table-th-no-sort>
-                        {{--<x-table.table-td class="table-full_name">
-                            <span class="show-web">--}}{{--{{__('admin/contacts.name_title')}}--}}{{--Contact</span>
-                            <div class="td-container">
-                                <span class="">
-                                                    Evalué
-                                                </span>
-                                <span class="">
-                                                    John Doe
-                                                </span>
-                            </div>
-                        </x-table.table-td>--}}
-
                         <x-table.table-td class="table-full_name">
                             <span class="show-web">{{__('pages/dashboard.my_evaluations')}}</span>
                             <span>
                                 <x-buttons.not-evaluated></x-buttons.not-evaluated>
                             </span>
                         </x-table.table-td>
-
+                        @foreach($evaluators as $evaluator)
                         <x-table.table-td class="table-full_name">
                             <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
-                            <span class="show-web">John Doe</span>
-                            <x-visuals.evaluated></x-visuals.evaluated>
+                            <span class="show-web">
+                            {{$evaluator->contact->first_name}}
+                            {{$evaluator->contact->last_name}}
+                            </span>
+                            @if($evaluator){{--NOT READY--}}
+                                <x-visuals.evaluated></x-visuals.evaluated>
+                            @else
+                                <x-visuals.not-evaluated></x-visuals.not-evaluated>
+                            @endif
                         </x-table.table-td>
-                        <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
-                            <span class="show-web">John Doe</span>
-                            <x-visuals.not-evaluated></x-visuals.not-evaluated>
-                        </x-table.table-td>
-                        <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
-                            <span class="show-web">John Doe</span>
-                            <x-visuals.not-evaluated></x-visuals.not-evaluated>
-                        </x-table.table-td>
-                        <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
-                            <span class="show-web">John Doe</span>
-                            <x-visuals.not-evaluated></x-visuals.not-evaluated>
-                        </x-table.table-td>
-                        <x-table.table-td class="table-full_name">
-                            <span class="show-web">{{__('pages/dashboard.evaluator')}}</span>
-                            <span class="show-web">John Doe</span>
-                            <x-visuals.not-evaluated></x-visuals.not-evaluated>
-                        </x-table.table-td>
+                        @endforeach
                     </tr>
-                @endfor
-
+                    @endforeach
 
                 </tbody>
             </table>
@@ -167,16 +98,13 @@
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
                         {{__('pages/dashboard.contacts')}}
                     </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        Projet CV
+                    @foreach($projects as $projectId=>$projectName)
+                    <x-table.table-th scope="col" sortable wire:click="sortBy('score')"
+                                      :direction="$sortField === 'score'? $sortDirection : null"
+                                      class="{{$sortField === 'score'? 'active-sort': ''}}">
+                        {{$projectName}}
                     </x-table.table-th>
-                    <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
-                                      :direction="$sortField === 'jiri'? $sortDirection : null"
-                                      class="{{$sortField === 'jiri'? 'active-sort': ''}}">
-                        Projet ART
-                    </x-table.table-th>
+                    @endforeach
                     <x-table.table-th scope="col" sortable wire:click="sortBy('jiri')"
                                       :direction="$sortField === 'jiri'? $sortDirection : null"
                                       class="{{$sortField === 'jiri'? 'active-sort': ''}}">
@@ -197,38 +125,18 @@
 
                 <tbody>
 
-                @for($i=0; $i <=12; $i++)
+                    @foreach($evaluated as $evaluatedPerson)
                     <tr class="table-row position-relative">
                         <x-table.table-th-no-sort scope="row" class="">
                             <span class="show-web">{{__('pages/dashboard.contact')}}</span>
                             <div class="td-container">
                                 <span class="">{{__('pages/dashboard.student')}}</span>
-                                <span class="">John Doe</span>
+                                <span class="">
+                                {{$evaluatedPerson->contact->first_name}}
+                                {{$evaluatedPerson->contact->last_name}}
+                                </span>
                             </div>
                         </x-table.table-th-no-sort>
-                        {{--         <x-table.table-th-no-sort scope="row" class="">
-                                     <span>Evalué</span>
-                                     <span >John Doe</span>
-                                 </x-table.table-th-no-sort>--}}
-                        {{--                    <x-table.table-td class="table-full_name">
-                                                <span class="show-web">--}}{{--{{__('admin/contacts.name_title')}}--}}{{--Contact</span>
-                                                <div class="td-container">
-                                                    <span>Evalué</span>
-                                                    <span >John Doe</span>
-                                                </div>
-                                            </x-table.table-td>--}}
-
-                        <x-table.table-td class="table-full_name">
-
-                            <div class="td-container">
-                                <span class="show-web">{{__('pages/dashboard.project')}}</span>
-                                <span class="show-web">CV</span>
-                            </div>
-                            <div class="points-container">
-                                <span>{{__('pages/dashboard.note')}}</span>
-                                <span>16/20</span>
-                            </div>
-                        </x-table.table-td>
 
                         <x-table.table-td class="table-full_name">
 
@@ -261,8 +169,6 @@
                         <x-table.table-td class="table-full_name">
                             <span class="show-web">{{__('pages/dashboard.final_note')}}</span>
                             <div class=" a-i-center">
-                                {{--     <x-fields.text id="points" name="points" placeholder="15" wire="points" value=""></x-fields.text>
-                                     <span>/20</span>--}}
 
                                 <label for="percent" class="sro">
                                     {{__('pages/dashboard.dashboard')}}
@@ -277,7 +183,7 @@
                             </div>
                         </x-table.table-td>
                     </tr>
-                @endfor
+                    @endforeach
 
                 <tr class="table-row position-relative">
                     <td>
