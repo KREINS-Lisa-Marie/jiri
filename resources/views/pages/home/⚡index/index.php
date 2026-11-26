@@ -40,7 +40,8 @@ new class extends Component
 
     public bool $isopenContactModal = false;
 
-    public $sortContactField = 'last_name';
+
+    public $sortContactField = 'created_at';
     public $sortContactDirection = 'desc';
 
     protected $queryStringContact = ['sortContactField', 'sortContactDirection'];
@@ -55,7 +56,7 @@ new class extends Component
     public string $jiri_state = '';
 
 
-    public $sortJiriField = 'name';
+    public $sortJiriField = 'created_at';
     public $sortJiriDirection = 'desc';
 
     protected $queryStringJiri = ['sortJiriField', 'sortJiriDirection'];
@@ -63,7 +64,7 @@ new class extends Component
 
 
 //tri
-    public $sortField = 'name';
+    public $sortField = 'created_at';
     public $sortDirection = 'desc';
 
     protected $queryString = ['sortField', 'sortDirection'];
@@ -184,7 +185,6 @@ new class extends Component
     public function render(): View
     {
         $projects = Project::get()->all();
-
         $user_id = Auth::user()->id;
 
         $currentexams = Jiri::where('user_id', $user_id)
@@ -285,7 +285,8 @@ new class extends Component
         ]);
 
         $this->projectSuccessMessage = __('pages/home.project_saved');
-        
+
+
         //$this->closeModal();
     }
     public function saveContact(): void
