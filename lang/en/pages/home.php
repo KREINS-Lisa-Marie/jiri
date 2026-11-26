@@ -11,8 +11,8 @@ return [
     'duration' => 'Duration',
     'state' => 'Status',
     'no_result' => 'No result',
-    'available_contacts' => 'Available contacts',
-    'not_available_contacts' => 'Unavailable contacts',
+    'available_contacts' => 'Contacts',
+    'not_available_contacts' => 'Archived contacts',
     'add_contact' => 'Add a contact',
     'contacts' => 'Contacts',
     'projects' => 'Projects',
@@ -50,4 +50,7 @@ return [
     'profile_image' => 'Contact image',
     'save' => 'Save',
     'save_contact' => 'Save a contact',
+
+    'contact_saved' => 'Contact saved',
+    'project_saved' => 'Project saved',
 ];
