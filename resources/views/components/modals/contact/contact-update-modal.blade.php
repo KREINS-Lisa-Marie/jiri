@@ -1,3 +1,6 @@
+@props([
+    'successMessage' => '',
+])
 <div {{ $attributes->class(['bg-opacity']) }} wire:keydown.escape.window ="closeModal()" >
     <button wire:click="closeModal" class="close-modal d-inline">
         {{__('pages/home.close')}}
@@ -37,6 +40,12 @@
             <x-buttons.submit-btn class="m-t-80 min-w-full">
                 {{__('pages/home.save')}}
             </x-buttons.submit-btn>
+
+            @if($successMessage)
+                <p class="success">
+                    {{$successMessage}}
+                </p>
+            @endif
         </fieldset>
     </form>
 </div>
