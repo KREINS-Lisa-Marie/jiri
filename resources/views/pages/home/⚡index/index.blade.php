@@ -68,7 +68,12 @@
                 </tbody>
             </table>
             <div class="pagination max-w-admin-web">
-                {{ $jiris->links() }}
+                {{ $jiris->links(data: ['scrollTo' => '#exams']) }}
+                {{--
+                pour que scroll pas jusque début de la page à chaque fois
+                https://www.youtube.com/watch?v=AnjT6shAn3M
+                https://sysadmin-journal.com/laravel-livewire-table-pagination-scroll-behaviour
+                --}}
             </div>
         </section>
         <section id="contacts" class="m-b-80">
@@ -148,7 +153,7 @@
                     </tbody>
                 </table>
                 <div class="pagination max-w-admin-web">
-                    {{ $available_contacts->links() }}
+                    {{ $available_contacts->links(data: ['scrollTo' => '#contacts']) }}
                 </div>
             </article>
             <article>
@@ -225,7 +230,7 @@
                     </tbody>
                 </table>
                 <div class="pagination max-w-admin-web">
-                    {{ $archived_contacts->links() }}
+                    {{ $archived_contacts->links(data: ['scrollTo' => '.archived-article']) }}
                 </div>
             </article>
         </section>
@@ -295,7 +300,7 @@
                 </tbody>
             </table>
             <div class="pagination max-w-admin-web">
-                {{ $projects->links() }}
+                {{ $projects->links(data: ['scrollTo' => '#projects']) }}
             </div>
         </section>
 
