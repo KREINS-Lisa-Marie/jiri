@@ -11,8 +11,8 @@ return [
     'duration' => 'Dauer',
     'state' => 'Status',
     'no_result' => 'Kein Ergebnis',
-    'available_contacts' => 'Verfügbare Kontakte',
-    'not_available_contacts' => 'Nicht verfügbare Kontakte',
+    'available_contacts' => 'Kontakte',
+    'not_available_contacts' => 'Archivierte Kontakte',
     'add_contact' => 'Kontakt hinzufügen',
     'contacts' => 'Kontakte',
     'projects' => 'Projekte',
@@ -50,4 +50,7 @@ return [
     'profile_image' => 'Kontaktbild',
     'save' => 'Speichern',
     'save_contact' => 'Einen Kontakt speichern',
+
+    'contact_saved' => 'Kontakt gespeichert',
+    'project_saved' => 'Projekt gespeichert',
 ];
