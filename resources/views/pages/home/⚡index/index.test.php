@@ -20,7 +20,7 @@ it('renders successfully', function () {
 it('verifies that the home page is showing content elements in the right order', function () {
     Livewire::test('pages::home.index')
         ->assertStatus(200)
-        ->assertSeeInOrder(['Dashboard', 'Épreuves', 'Ajouter une épreuve', 'Contacts', 'Contacts disponibles', 'Contacts indisponibles', 'Projets', 'Ajouter un projet' ]);
+        ->assertSeeInOrder(['Dashboard', 'Épreuves', 'Ajouter une épreuve', 'Contacts', 'Contacts', 'Contacts archivés', 'Projets', 'Ajouter un projet' ]);
 });
 
 it('shows a message when there is no current jiri', function () {

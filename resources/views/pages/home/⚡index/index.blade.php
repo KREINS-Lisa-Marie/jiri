@@ -109,8 +109,8 @@
                                 <span class="show-web">{{__('pages/home.contact_image')}}</span>
 
                                 @if($available_contact->profile_img)
-                                    <img src="{{Storage::disk('s3')->url('images/contacts/variants/288x288/'.basename($available_contact->profile_img))}}"
-                                         alt="{{__('pages/home.contact_image')}}"
+                                    <img src="{{Storage::disk('s3')->url('images/products/variants/288x288/'.basename($available_contact->profile_img))}}"
+                                         {{--{!! asset('storage/images/products/variants/288x288/'.basename($product->product_image)) !!}"--}} alt="{{__('admin/products.the_product_image')}}"
                                          class=" small_contact-img">
                                 @else
                                     <img src="{!! asset('assets/default/default.jpg') !!}" alt="{{__('pages/home.contact_img')}}"
@@ -182,8 +182,8 @@
                             <x-table.table-td class="table-full_name">
                                 <span class="show-web">{{__('pages/home.contact_image')}}</span>
                                 @if($archived_contact->profile_img)
-                                    <img src="{{Storage::disk('s3')->url('images/contacts/variants/288x288/'.basename($archived_contact->profile_img))}}"
-                                          alt="{{__('pages/home.contact_image')}}"
+                                    <img src="{{Storage::disk('s3')->url('images/products/variants/288x288/'.basename($archived_contact->profile_img))}}"
+                                         {{--{!! asset('storage/images/products/variants/288x288/'.basename($product->product_image)) !!}"--}} alt="{{__('admin/products.the_product_image')}}"
                                          class=" small_contact-img">
                                 @else
                                     <img src="{!! asset('assets/default/default.jpg') !!}" alt="{{__('pages/home.contact_img')}}"
@@ -301,15 +301,15 @@
 
         {{--        Contact     --}}
         @if($isopenContactModal)
-                <x-modals.contact.contact-update-modal/>
+                <x-modals.contact.contact-update-modal :success-message="$successMessage"/>
         @endif
 
         {{--        Project     --}}
         @if($isopenProjectUpdateModal)
-                <x-modals.project-update-modal :project-information="$project_information"/>
+                <x-modals.project-update-modal :project-information="$project_information" :project-success-message="$projectSuccessMessage"/>
         @endif
         @if($isopenProjectCreateModal)
-                <x-modals.project-create-modal/>
+                <x-modals.project-create-modal :project-success-message="$projectSuccessMessage"/>
         @endif
     </div>
 </main>

@@ -68,6 +68,12 @@ new class extends Component
 
     protected $queryString = ['sortField', 'sortDirection'];
 
+
+    public string $successMessage = '';     //message pour dire à l'utilisateur qu'il a sauvé le contact parce que sinon, on ne voit pas si ça a marché ou pas.
+    public string $projectSuccessMessage = '';     //message pour dire à l'utilisateur qu'il a sauvé le projet parce que sinon, on ne voit pas si ça a marché ou pas.
+
+
+
     public function sortBy($field)
     {
         if ($this->sortField === $field) {
@@ -97,6 +103,7 @@ new class extends Component
 
     public function sortContactsBy($field)
     {
+
         if ($this->sortContactField === $field) {
             $this->sortContactDirection = $this->sortContactDirection === 'asc' ? 'desc' : 'asc';
         } else {
@@ -120,6 +127,8 @@ new class extends Component
 
     public function openProjectUpdateModal(Project $project)
     {
+
+        $this->projectSuccessMessage = '';
         $this->project = Project::findOrFail($project->id);
 
         $this->name = $project->name;
@@ -132,6 +141,8 @@ new class extends Component
 
     public function openProjectCreateModal()
     {
+        $this->projectSuccessMessage = '';
+
         $this->name = '';
         $this->specifications = '';
         $this->project_information = '';
@@ -144,6 +155,8 @@ new class extends Component
 
     public function openContactModal(Contact $contact)
     {
+        $this->successMessage = '';
+
         $this->first_name = '';
         $this->last_name = '';
         $this->profile_img = null;
@@ -152,13 +165,11 @@ new class extends Component
         if ($contact->exists) {
         $this->contact = Contact::findOrFail($contact->id);
         $user_id = Auth()->user();
-
         $this->first_name = $contact->first_name ?? '';
         $this->last_name = $contact->last_name ?? '';
         $this->profile_img = $contact->profile_img ?? null;
         $this->email = $contact->email ?? '';
         }
-
 
         $this->isopenContactModal = true;
     }
@@ -185,10 +196,7 @@ new class extends Component
             'projects' => Project::query()
                 ->where('user_id', $user_id)
                 ->where(function ($query){
-                    $query->where('name', 'like', '%' . $this->project_search . '%')
-                        ->orWhere('project_information', 'like', '%' . $this->project_search . '%')
-                        ->orWhere('specifications', 'like', '%' . $this->project_search . '%')
-                        ->orWhere('state', 'like', '%' . $this->project_search . '%');
+                    $query->where('name', 'like', '%' . $this->project_search . '%');
                 })
                 ->orderBy($this->sortField, $this->sortDirection)
                 ->paginate(10, ['*'], 'projectPage')->onEachSide(0),
@@ -252,7 +260,9 @@ new class extends Component
             'project_information'=>$validated_data['project_information'],
         ]);
 
-        $this->closeModal();
+        $this->projectSuccessMessage = __('pages/home.project_saved');
+
+        //$this->closeModal();
     }
 
     public function updateProject(): void
@@ -274,7 +284,9 @@ new class extends Component
             'project_information'=>$validated_data['project_information'],
         ]);
 
-        $this->closeModal();
+        $this->projectSuccessMessage = __('pages/home.project_saved');
+        
+        //$this->closeModal();
     }
     public function saveContact(): void
     {
@@ -285,12 +297,12 @@ new class extends Component
             'first_name'=>'required|string|max:255',
             'last_name'=>'required|string|max:255',
             'profile_img'=>'image|nullable|mimes:jpg,jpeg,png,webp',
-            'email'=>['required','string','email','max:255','max:255',Rule::unique('contacts')->ignore($this->contact->id)],
+            'email'=>['required','string','email','max:255','max:255',Rule::unique('contacts')->ignore($this->contact?->id)],
         ]);
 
 
         if ($this->profile_img){
-            //$image_path = $this->profile_img->store(config('contactimage.originals_path'), 's3');
+            //$image_path = $this->contact_image->store(config('contactimage.originals_path'), 's3');
             $image_path = $this->profile_img->store(config('contactimage.originals_path'), 'public');
             $filename = basename($image_path); // = juste le nom de l'image sans les dossiers etc
             $image = Image::decode(          //marche pas avec read
@@ -329,8 +341,9 @@ new class extends Component
             $validated_data['user_id'] = $user_id;
             Contact::create($validated_data);
         }
+        $this->successMessage = __('pages/home.contact_saved');
 
-        $this->closeModal();
+        //$this->closeModal();
     }
 
     public function updatedProjectSearch(): void

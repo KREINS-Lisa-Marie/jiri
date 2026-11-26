@@ -1,3 +1,7 @@
+@props([
+    'name'=>'name',
+    'projectSuccessMessage'=>'',
+])
 <div {{ $attributes->class(['bg-opacity']) }} wire:keydown.escape.window ="closeModal()" >
     <button wire:click="closeModal" class="close-modal d-inline">
         {{__('pages/home.close')}}
@@ -21,7 +25,7 @@
                     </p>
                 </div>
                 <div class="d-flex flex-c gap-24 ">
-                    <x-fields.text wire="name" name="name" id="name" placeholder="Projet CV">
+                    <x-fields.text wire="{{$name}}" name="{{$name}}" id="{{$name}}" placeholder="Projet CV">
                         {{__('pages/home.name_project')}}
                     </x-fields.text>
                     <x-fields.text wire="specifications" name="specifications"
@@ -36,6 +40,12 @@
             <x-buttons.submit-btn class="m-t-80 min-w-full">
                 {{__('pages/home.create_project')}}
             </x-buttons.submit-btn>
+
+            @if($projectSuccessMessage)
+                <p class="success">
+                    {{$projectSuccessMessage}}
+                </p>
+            @endif
         </fieldset>
     </form>
 </div>
